@@ -58,5 +58,32 @@ public class Peca {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	@Override
+	public boolean equals(Object other){
+		if (other == null) {
+			return false;
+		}
+		
+		if (this == other) {
+			return true;
+		}
+		
+		Peca otherPeca = (Peca) other;
+		
+		StringBuilder strBuilderThis = new StringBuilder();
+		strBuilderThis.append(this.nome)
+		.append(this.tipo)
+		.append(this.marca)
+		.append(this.descricao);
+		
+		StringBuilder strBuilderOther = new StringBuilder();
+		strBuilderOther.append(otherPeca.getNome())
+		.append(otherPeca.getTipo())
+		.append(otherPeca.getMarca())
+		.append(otherPeca.getDescricao());
+		
+		return strBuilderThis.toString().equals(strBuilderOther.toString());
+	}
 
 }

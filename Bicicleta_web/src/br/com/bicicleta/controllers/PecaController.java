@@ -15,6 +15,9 @@ import br.com.bicicleta.modelo.Peca;
 @Controller
 public class PecaController {
 
+	
+	EntityManagerFactory factory;
+	
 	@RequestMapping("formpeca")
 	public String formPeca()
 	{
@@ -42,14 +45,24 @@ public class PecaController {
 	public String buscaPeca(Model model){
 		List<Peca> pecas = null;
 
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("bicicletas");
+		EntityManagerFactory factory = getFactory();
 		EntityManager manager = factory.createEntityManager();
 		pecas = (List<Peca>) manager.createQuery("select p from Peca p").getResultList();
 
 		model.addAttribute("pecas",pecas);
-		factory.close();
+		//factory.close();
+		
 		return "peca/busca";
 
+	}
+
+	private EntityManagerFactory getFactory() {
+		
+		if (factory == null) {
+			factory =  Persistence.createEntityManagerFactory("bicicletas");
+		}
+		return factory;
+	
 	}
 
 	@RequestMapping("detalhepeca")
