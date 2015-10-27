@@ -1,8 +1,13 @@
 package br.com.bicicleta.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Peca {
@@ -15,8 +20,9 @@ public class Peca {
 	private String marca;
 	private String descricao;
 	
-//	@ManyToMany(mappedBy = "pecas",fetch = FetchType.EAGER)
-//	private List<Bicicleta> bicicletas = new ArrayList<Bicicleta>();
+	@SuppressWarnings("unused")
+	@ManyToMany(mappedBy = "pecas",fetch = FetchType.EAGER)
+	private List<Bicicleta> bicicletas = new ArrayList<Bicicleta>();
 	
 	public Long getId() {
 		return id;

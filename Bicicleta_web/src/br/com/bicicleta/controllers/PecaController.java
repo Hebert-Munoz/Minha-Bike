@@ -15,19 +15,17 @@ import br.com.bicicleta.modelo.Peca;
 @Controller
 public class PecaController {
 
-	
+
 	EntityManagerFactory factory;
-	
+
 	@RequestMapping("formpeca")
-	public String formPeca()
-	{
+	public String formPeca() {
 		return "peca/form_peca";
 	}
 
 	@RequestMapping("CadastraPeca")
-	public String cadastraPeca(Peca peca)
-	{
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("bicicletas");
+	public String cadastraPeca(Peca peca) {
+		EntityManagerFactory factory = getFactory();
 		EntityManager manager = factory.createEntityManager();
 
 		manager.getTransaction().begin();    
@@ -50,19 +48,16 @@ public class PecaController {
 		pecas = (List<Peca>) manager.createQuery("select p from Peca p").getResultList();
 
 		model.addAttribute("pecas",pecas);
-		//factory.close();
-		
+
 		return "peca/busca";
 
 	}
 
 	private EntityManagerFactory getFactory() {
-		
 		if (factory == null) {
 			factory =  Persistence.createEntityManagerFactory("bicicletas");
 		}
 		return factory;
-	
 	}
 
 	@RequestMapping("detalhepeca")
@@ -78,10 +73,10 @@ public class PecaController {
 		model.addAttribute("peca",peca);
 		return 	"peca/detalhepeca";
 	}
-	
+
 	@RequestMapping("home")
 	public void home() {
-		
+
 	}
 
 }

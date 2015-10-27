@@ -7,12 +7,15 @@ import javax.persistence.Persistence;
 
 public class GenerateAcessProviders {
 
-  public static void main(String[] args) {
-    EntityManagerFactory factory = Persistence.
-          createEntityManagerFactory("bicicletas");
+	public static void main(String[] args) {
 
-    factory.close();
-  }
-  
-  
+		try {
+			EntityManagerFactory factory = Persistence.
+					createEntityManagerFactory("bicicletas");
+			factory.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
